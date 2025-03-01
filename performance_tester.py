@@ -341,8 +341,8 @@ class AsyncPerformanceTester:
         for llm_name, config in self.config.get("LLM", {}).items():
             # 检查配置有效性
             if llm_name == "CozeLLM":
-                if any(x in config.get("bot_id", "") for x in ["你的"]) \
-                        or any(x in config.get("user_id", "") for x in ["你的"]):
+                if any(x in str(config.get("bot_id", "")) for x in ["你的"]) \
+                        or any(x in str(config.get("user_id", "")) for x in ["你的"]):
                     print(f"⏭️  LLM {llm_name} 未配置bot_id/user_id，已跳过")
                     continue
             elif "api_key" in config and any(x in config["api_key"] for x in ["你的", "placeholder", "sk-xxx"]):
